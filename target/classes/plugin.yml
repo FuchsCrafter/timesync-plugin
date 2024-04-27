@@ -1,0 +1,12 @@
+name: timesync
+version: '1.0'
+main: de.fuchscrafter.timesyncplugin.Timesync
+api-version: '1.19'
+authors: [FuchsCrafter]
+description: Synchronises the server's time to real time
+website: fuchscrafter.de
+commands:
+  timesync:
+    description: Shows information about the state of the plugin
+    usage: /timesync
+    permission: timesync.command
