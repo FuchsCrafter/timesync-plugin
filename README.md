@@ -1,5 +1,5 @@
 # timesync-plugin
-A drop-in plugin for synchronising your server's time to real-time.
+Fast and lightweight time synchronization for your Minecraft server
 
 timesync-plugin is a Minecraft Paper Plugin (developed for 1.19 and up) which synchronises the server's time to the real-time (this depends on the servers time settings and location). 
 It uses Bukkits EventScheduler to schedule itself. Parts of the plugin are written in Kotlin.
