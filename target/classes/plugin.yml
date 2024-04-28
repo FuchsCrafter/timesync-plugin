@@ -1,5 +1,5 @@
 name: timesync
-version: '1.0'
+version: '1.1-rc'
 main: de.fuchscrafter.timesyncplugin.Timesync
 api-version: '1.19'
 authors: [FuchsCrafter]

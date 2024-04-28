@@ -1,8 +1,8 @@
 package de.fuchscrafter.timesyncplugin;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.World;
-import org.bukkit.command.CommandException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -14,23 +14,25 @@ import java.util.Objects;
 
 public final class Timesync extends JavaPlugin {
 
+    private static Timesync instance;
     @Override
     public void onEnable() {
         // Plugin startup logic
-
+        instance = this;
         BukkitScheduler scheduler = getServer().getScheduler();
         Objects.requireNonNull(
                 this.getCommand("timesync")).setExecutor(new timesyncCommand()
         );
+        instance.saveDefaultConfig();
 
-        try {
-            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule doDaylightCycle false"); // fixme: fix unknown command error
-
-
-        } catch (CommandException e) {
-            Bukkit.getLogger().info("(TimeSync) Day/Night cycle couldn't be disabled! (continuing plugin)");
+        for (World w: Bukkit.getServer().getWorlds()) {
+            w.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         }
 
+
+
+        Long timesyncDelay = new Long( instance.getConfig().getInt("sync-delay") * 20 ) ;
+        Bukkit.getLogger().info("(Timesync) Delay: " + new String(String.valueOf(timesyncDelay)) + " ticks");
 
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
@@ -41,7 +43,7 @@ public final class Timesync extends JavaPlugin {
                     w.setTime(mcTime);
                 }
             }
-        }, 0L, 400L); // todo: add config option for tick delay
+        }, 0L, timesyncDelay);
     }
 
     @Override
@@ -67,6 +69,10 @@ public final class Timesync extends JavaPlugin {
         int hours = date.getHours();
         int min   = date.getMinutes();
         return (int) (((hours*1000)-6000) + (min*16.6));
+    }
+
+    public static Timesync getInstance() {
+        return instance;
     }
 }
 
