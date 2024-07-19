@@ -4,7 +4,7 @@
   <groupId>de.fuchscrafter</groupId>
   <artifactId>timesyncplugin</artifactId>
   <name>timesync</name>
-  <version>1.1-rc</version>
+  <version>1.2-rc</version>
   <description>Synchronises the server's time to real time</description>
   <url>fuchscrafter.de</url>
   <build>
