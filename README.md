@@ -15,8 +15,4 @@ It will display the system time of the server and the in-game-time of the server
 
 ## Known limitations
 These are the things that are currently being worked on:
-- No option for setting the time zone
-  - This means that the server time syncs itself to the servers' time, which may be not optimal if a hosting provider in another country/timezone is being used
-- No option for custom sync delay
 - No possibility to make the day longer and the nights shorter
-- The plugin does not account for summer/winter time
