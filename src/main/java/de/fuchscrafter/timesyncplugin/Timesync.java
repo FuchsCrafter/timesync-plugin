@@ -15,6 +15,8 @@ import java.util.Objects;
 public final class Timesync extends JavaPlugin {
 
     private static Timesync instance;
+    public Integer timeOffset;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -31,8 +33,11 @@ public final class Timesync extends JavaPlugin {
 
 
 
-        Long timesyncDelay = new Long( instance.getConfig().getInt("sync-delay") * 20 ) ;
+        Long timesyncDelay = new Long( instance.getConfig().getInt("sync-delay") * 20 );
+        timeOffset = new Integer(instance.getConfig().getInt("time-offset"));
+
         Bukkit.getLogger().info("(Timesync) Delay: " + new String(String.valueOf(timesyncDelay)) + " ticks");
+        Bukkit.getLogger().info("(Timesync) Offset: " + new String(String.valueOf(timeOffset)) + "h");
 
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
@@ -66,7 +71,7 @@ public final class Timesync extends JavaPlugin {
             throw new RuntimeException(e);
         }
 
-        int hours = date.getHours();
+        int hours = date.getHours() + instance.timeOffset;
         int min   = date.getMinutes();
         return (int) (((hours*1000)-6000) + (min*16.6));
     }
