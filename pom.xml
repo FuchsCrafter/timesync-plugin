@@ -6,7 +6,7 @@
 
     <groupId>de.fuchscrafter</groupId>
     <artifactId>timesyncplugin</artifactId>
-    <version>1.2-rc</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>timesync</name>
