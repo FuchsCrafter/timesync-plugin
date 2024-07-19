@@ -1,5 +1,6 @@
 package de.fuchscrafter.timesyncplugin
 
+import de.fuchscrafter.timesyncplugin.Timesync
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -17,11 +18,16 @@ class timesyncCommand : CommandExecutor {
 
         val mcTime = Timesync.timeToMcTime()
 
+        val pluginTimeOffset = Timesync.getInstance().timeOffset;
+        val timeWithOffset = (now[Calendar.HOUR_OF_DAY]+pluginTimeOffset).toString() + ":" + now[Calendar.MINUTE]
+
         val prefix = "[TimeSync] "
-        val msg = "Time: $timeNow (real-time) $mcTime (in-game-time)"
+        val msg = "Time: $timeNow (system time), $mcTime (in-game-time)"
+        val offsetMsg = "Offset: $pluginTimeOffset h -> $timeWithOffset"
 
         if (sender is Player) {
             sender.sendMessage(ChatColor.RESET.toString() + "" + ChatColor.BOLD + prefix + ChatColor.RESET + msg)
+            sender.sendMessage(ChatColor.RESET.toString() + "" + ChatColor.BOLD + prefix + ChatColor.RESET + offsetMsg)
         } else {
             Bukkit.getLogger().info(prefix + msg)
         }
