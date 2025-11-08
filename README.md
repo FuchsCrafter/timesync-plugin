@@ -14,5 +14,7 @@ While the plugin does most things itself, there is a `/timesync` command to chec
 It will display the system time of the server and the in-game-time of the server.
 
 ## Known limitations
-These are the things that are currently being worked on:
-- No possibility to make the day longer and the nights shorter
+As a Minecraft day is the same lenght every day, this plugin does not account for seasonal and locational sunrise changes. Instead, this emulates an idealized day.
+
+# Development Info
+Development on this plugin is mostly finished.
